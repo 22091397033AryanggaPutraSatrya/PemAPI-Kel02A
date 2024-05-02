@@ -1,0 +1,216 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Manajemen Keuangan",
+      "description": "API untuk mengelola catatan keuangan",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8000/api/v1"
+      }
+    ],
+    "paths": {
+      "/pemasukan": {
+        "get": {
+          "summary": "Dapatkan semua catatan pemasukan",
+          "responses": {
+            "200": {
+              "description": "Daftar catatan pemasukan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CatatanPemasukan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Buat catatan pemasukan baru",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputCatatanPemasukan"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Catatan pemasukan yang telah dibuat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CatatanPemasukan"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/pengeluaran": {
+        "get": {
+          "summary": "Dapatkan semua catatan pengeluaran",
+          "responses": {
+            "200": {
+              "description": "Daftar catatan pengeluaran",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/CatatanPengeluaran"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Buat catatan pengeluaran baru",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InputCatatanPengeluaran"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Catatan pengeluaran yang telah dibuat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CatatanPengeluaran"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "CatatanPemasukan": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "Pengidentifikasi unik untuk catatan pemasukan"
+            },
+            "judul": {
+              "type": "string",
+              "description": "Judul dari catatan pemasukan"
+            },
+            "deskripsi": {
+              "type": "string",
+              "description": "Deskripsi dari catatan pemasukan"
+            },
+            "jumlah": {
+              "type": "number",
+              "description": "Jumlah pemasukan"
+            },
+            "tanggal_pemasukan": {
+              "type": "string",
+              "format": "date",
+              "description": "Tanggal catatan pemasukan"
+            }
+          }
+        },
+        "CatatanPengeluaran": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "description": "Pengidentifikasi unik untuk catatan pengeluaran"
+            },
+            "judul": {
+              "type": "string",
+              "description": "Judul dari catatan pengeluaran"
+            },
+            "deskripsi": {
+              "type": "string",
+              "description": "Deskripsi dari catatan pengeluaran"
+            },
+            "jumlah": {
+              "type": "number",
+              "description": "Jumlah pengeluaran"
+            },
+            "tanggal_pengeluaran": {
+              "type": "string",
+              "format": "date",
+              "description": "Tanggal catatan pengeluaran"
+            }
+          }
+        },
+        "InputCatatanPemasukan": {
+          "type": "object",
+          "required": [
+            "judul",
+            "jumlah",
+            "tanggal_pemasukan"
+          ],
+          "properties": {
+            "judul": {
+              "type": "string",
+              "description": "Judul dari catatan pemasukan"
+            },
+            "deskripsi": {
+              "type": "string",
+              "description": "Deskripsi dari catatan pemasukan"
+            },
+            "jumlah": {
+              "type": "number",
+              "description": "Jumlah pemasukan"
+            },
+            "tanggal_pemasukan": {
+              "type": "string",
+              "format": "date",
+              "description": "Tanggal catatan pemasukan"
+            }
+          }
+        },
+        "InputCatatanPengeluaran": {
+          "type": "object",
+          "required": [
+            "judul",
+            "jumlah",
+            "tanggal_pengeluaran"
+          ],
+          "properties": {
+            "judul": {
+              "type": "string",
+              "description": "Judul dari catatan pengeluaran"
+            },
+            "deskripsi": {
+              "type": "string",
+              "description": "Deskripsi dari catatan pengeluaran"
+            },
+            "jumlah": {
+              "type": "number",
+              "description": "Jumlah pengeluaran"
+            },
+            "tanggal_pengeluaran": {
+              "type": "string",
+              "format": "date",
+              "description": "Tanggal catatan pengeluaran"
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,149 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Catatan Keuangan",
+        "version": "1.0.0",
+      "description": "API untuk manajemen pengguna dalam aplikasi web."
+    },
+    "servers": [
+      {
+        "url": "http://127.0.0.1:8000"
+      }
+    ],
+    "paths": {
+      "/register": {
+        "post": {
+          "summary": "Registrasi pengguna baru",
+          "operationId": "registerUser",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "password": {
+                      "type": "string",
+                      "format": "password"
+                    }
+                  },
+                  "required": ["name", "email", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pendaftaran berhasil"
+            },
+            "400": {
+              "description": "Kesalahan dalam permintaan"
+            }
+          }
+        }
+      },
+      "/login": {
+        "post": {
+          "summary": "Masuk ke akun pengguna",
+          "operationId": "loginUser",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "password": {
+                      "type": "string",
+                      "format": "password"
+                    }
+                  },
+                  "required": ["email", "password"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Berhasil masuk ke akun"
+            },
+            "401": {
+              "description": "Email atau password salah"
+            }
+          }
+        }
+      },
+      "/logout": {
+        "get": {
+          "summary": "Keluar dari akun pengguna",
+          "operationId": "logoutUser",
+          "responses": {
+            "200": {
+              "description": "Berhasil keluar dari akun"
+            }
+          }
+        }
+      },
+      "/profile": {
+        "get": {
+          "summary": "Mendapatkan profil pengguna",
+          "operationId": "getUserProfile",
+          "responses": {
+            "200": {
+              "description": "Profil pengguna berhasil ditemukan"
+            },
+            "401": {
+              "description": "Harus masuk untuk mengakses profil"
+            }
+          }
+        },
+        "put": {
+          "summary": "Memperbarui profil pengguna",
+          "operationId": "updateUserProfile",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    }
+                  },
+                  "required": ["name", "email"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Profil pengguna berhasil diperbarui"
+            },
+            "400": {
+              "description": "Kesalahan dalam permintaan"
+            },
+            "401": {
+              "description": "Harus masuk untuk memperbarui profil"
+            },
+            "409": {
+              "description": "Email sudah digunakan oleh pengguna lain"
+            }
+          }
+        }
+      }
+    }
+  }
+  

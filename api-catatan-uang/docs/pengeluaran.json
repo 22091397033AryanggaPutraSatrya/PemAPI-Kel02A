@@ -1,0 +1,153 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Expense Management API",
+      "version": "1.0.0",
+      "description": "API untuk manajemen pengeluaran dalam aplikasi."
+    },
+    "servers": [
+      {
+        "url": "http://127.0.0.1:8000"
+      }
+    ],
+    "paths": {
+      "/pengeluaran": {
+        "get": {
+          "summary": "Mendapatkan daftar pengeluaran pengguna",
+          "operationId": "getExpenseList",
+          "responses": {
+            "200": {
+              "description": "Daftar pengeluaran berhasil ditemukan"
+            },
+            "401": {
+              "description": "Harus masuk untuk mengakses daftar pengeluaran"
+            }
+          }
+        },
+        "post": {
+          "summary": "Menambahkan pengeluaran baru",
+          "operationId": "addNewExpense",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "judul": {
+                      "type": "string"
+                    },
+                    "deskripsi": {
+                      "type": "string"
+                    },
+                    "jumlah": {
+                      "type": "number",
+                      "format": "double"
+                    },
+                    "tanggal_pengeluaran": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  },
+                  "required": ["judul", "jumlah", "tanggal_pengeluaran"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pengeluaran berhasil ditambahkan"
+            },
+            "400": {
+              "description": "Kesalahan dalam permintaan"
+            },
+            "401": {
+              "description": "Harus masuk untuk menambahkan pengeluaran"
+            }
+          }
+        }
+      },
+      "/pengeluaran/{id}": {
+        "put": {
+          "summary": "Memperbarui pengeluaran",
+          "operationId": "updateExpense",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID pengeluaran",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "judul": {
+                      "type": "string"
+                    },
+                    "deskripsi": {
+                      "type": "string"
+                    },
+                    "jumlah": {
+                      "type": "number",
+                      "format": "double"
+                    },
+                    "tanggal_pengeluaran": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pengeluaran berhasil diperbarui"
+            },
+            "400": {
+              "description": "Kesalahan dalam permintaan"
+            },
+            "401": {
+              "description": "Harus masuk untuk memperbarui pengeluaran"
+            },
+            "404": {
+              "description": "Pengeluaran tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Menghapus pengeluaran",
+          "operationId": "deleteExpense",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID pengeluaran",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Pengeluaran berhasil dihapus"
+            },
+            "401": {
+              "description": "Harus masuk untuk menghapus pengeluaran"
+            },
+            "404": {
+              "description": "Pengeluaran tidak ditemukan"
+            }
+          }
+        }
+      }
+    }
+  }
+  

@@ -1,0 +1,153 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Catatan Keuangan",
+        "version": "1.0.0",
+      "description": "API untuk manajemen pemasukan dalam aplikasi."
+    },
+    "servers": [
+      {
+        "url": "http://127.0.0.1:8000"
+      }
+    ],
+    "paths": {
+      "/pemasukan": {
+        "get": {
+          "summary": "Mendapatkan daftar pemasukan pengguna",
+          "operationId": "getIncomeList",
+          "responses": {
+            "200": {
+              "description": "Daftar pemasukan berhasil ditemukan"
+            },
+            "401": {
+              "description": "Harus masuk untuk mengakses daftar pemasukan"
+            }
+          }
+        },
+        "post": {
+          "summary": "Menambahkan pemasukan baru",
+          "operationId": "addNewIncome",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "judul": {
+                      "type": "string"
+                    },
+                    "deskripsi": {
+                      "type": "string"
+                    },
+                    "jumlah": {
+                      "type": "number",
+                      "format": "double"
+                    },
+                    "tanggal_pemasukan": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  },
+                  "required": ["judul", "jumlah", "tanggal_pemasukan"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pemasukan berhasil ditambahkan"
+            },
+            "400": {
+              "description": "Kesalahan dalam permintaan"
+            },
+            "401": {
+              "description": "Harus masuk untuk menambahkan pemasukan"
+            }
+          }
+        }
+      },
+      "/pemasukan/{id}": {
+        "put": {
+          "summary": "Memperbarui pemasukan",
+          "operationId": "updateIncome",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID pemasukan",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "judul": {
+                      "type": "string"
+                    },
+                    "deskripsi": {
+                      "type": "string"
+                    },
+                    "jumlah": {
+                      "type": "number",
+                      "format": "double"
+                    },
+                    "tanggal_pemasukan": {
+                      "type": "string",
+                      "format": "date"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pemasukan berhasil diperbarui"
+            },
+            "400": {
+              "description": "Kesalahan dalam permintaan"
+            },
+            "401": {
+              "description": "Harus masuk untuk memperbarui pemasukan"
+            },
+            "404": {
+              "description": "Pemasukan tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Menghapus pemasukan",
+          "operationId": "deleteIncome",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID pemasukan",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Pemasukan berhasil dihapus"
+            },
+            "401": {
+              "description": "Harus masuk untuk menghapus pemasukan"
+            },
+            "404": {
+              "description": "Pemasukan tidak ditemukan"
+            }
+          }
+        }
+      }
+    }
+  }
+  
